@@ -1,0 +1,63 @@
+﻿<Window x:Class="MVVMExample.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MVVMExample"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="380" Width="700" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen" WindowStyle="None" BorderBrush="Black" BorderThickness="1">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="300"/>
+            <RowDefinition Height="25"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Background="#FF86A2D4" MouseLeftButtonDown="Grid_MouseLeftButtonDown">
+
+        </Grid>
+        <Grid Grid.Row="1">
+            <Menu FontFamily="Consolas" FontSize="18.667">
+                <MenuItem Header="Добавить" Command="{Binding AddEmployeeCommand}"/>
+                <MenuItem Header="Удалить" Command="{Binding RemoveEmployeeCommand}" CommandParameter="{Binding SelectedEmployee}"/>
+                <MenuItem Header="Выйти" Click="CloseApp"/>
+            </Menu>
+        </Grid>
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.6*"/>
+                <ColumnDefinition Width="0.4*"/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0" x:Name="ItemsBlock">
+                <ListBox  ItemsSource="{Binding Employees}" SelectedItem="{Binding SelectedEmployee}"  Height="300" VerticalAlignment="Top" HorizontalAlignment="Stretch">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <WrapPanel>
+                                <TextBlock FontSize="14" FontWeight="Bold" Text="{Binding FirstName}" HorizontalAlignment="Left" Margin="15, 2, 2, 2"/>
+                                <TextBlock FontSize="12" FontWeight="Bold" Text="{Binding LastName}" HorizontalAlignment="Right" Margin="15, 2, 2, 2"/>
+                            </WrapPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+
+            </Grid>
+            <Grid Grid.Column="1" x:Name="EditBlock" DataContext="{Binding SelectedEmployee}">
+                <TextBlock   HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Выбранный сотрудник:" VerticalAlignment="Top" FontSize="16"/>
+                <TextBox HorizontalAlignment="Left" Height="23" Margin="10,62,0,0" TextWrapping="Wrap" Text="{Binding FirstName}" VerticalAlignment="Top" Width="241"/>
+                <TextBlock  HorizontalAlignment="Left" Margin="10,41,0,0" TextWrapping="Wrap" Text="Имя:" VerticalAlignment="Top"/>
+                <TextBox HorizontalAlignment="Left" Height="23" Margin="10,111,0,0" TextWrapping="Wrap" Text="{Binding LastName}" VerticalAlignment="Top" Width="241"/>
+                <TextBlock  HorizontalAlignment="Left" Margin="10,90,0,0" TextWrapping="Wrap" Text="Фамилия:" VerticalAlignment="Top"/>
+                <TextBox HorizontalAlignment="Left" Height="23" Margin="10,160,0,0" TextWrapping="Wrap" Text="{Binding Age}" VerticalAlignment="Top" Width="241"/>
+                <TextBlock  HorizontalAlignment="Left" Margin="10,139,0,0" TextWrapping="Wrap" Text="Возраст:" VerticalAlignment="Top"/>
+                <TextBox HorizontalAlignment="Left" Height="23" Margin="10,209,0,0" TextWrapping="Wrap" Text="{Binding Role}" VerticalAlignment="Top" Width="241"/>
+                <TextBlock  HorizontalAlignment="Left" Margin="10,188,0,0" TextWrapping="Wrap" Text="Должность:" VerticalAlignment="Top"/>
+                <TextBox HorizontalAlignment="Left" Height="23" Margin="10,258,0,0" TextWrapping="Wrap" Text="{Binding Fee}" VerticalAlignment="Top" Width="241"/>
+                <TextBlock  HorizontalAlignment="Left" Margin="10,237,0,0" TextWrapping="Wrap" Text="Зарплата:" VerticalAlignment="Top"/>
+
+            </Grid>
+        </Grid>
+        <Grid Grid.Row="3" Background="#FFC1BEBE">
+
+        </Grid>
+    </Grid>
+</Window>
